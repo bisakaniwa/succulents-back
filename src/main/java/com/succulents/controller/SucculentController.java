@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.rmi.UnexpectedException;
 import java.util.List;
 
 @RestController
@@ -31,5 +32,10 @@ public class SucculentController {
     @PostMapping
     ResponseEntity<Succulent> save(@RequestBody Succulent succulent) {
         return new ResponseEntity<>(this.service.save(succulent), HttpStatus.CREATED);
+    }
+
+    @PutMapping("/update/{id}")
+    ResponseEntity<Succulent> update(@RequestBody Succulent succulent) throws UnexpectedException {
+        return ResponseEntity.ok(this.service.update(succulent));
     }
 }
